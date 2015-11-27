@@ -8,23 +8,22 @@ attr_accessor :entries
         @entries = []
   end
 
-  p "i am here"
-
   def add_entry(name, phone_number, email)
     index = 0
-    p "adding an entry #{name}"
     @entries.each do |entry|
       if name < entry.name
-          p "i am breaking"
           break
 
       end
       index +=1
     end
-    p "Going to add to entires #{name}"
     @entries.insert(index, Entry.new(name, phone_number, email))
   end
 
-
+  def remove_entry(name, phone_number, email)
+    found_index = nil
+    @entries.each_with_index {| entry, index | found_index = index if (entry.name == name)}
+    @entries.delete_at(found_index) if !found_index.nil?
+  end
 
 end
