@@ -1,4 +1,5 @@
 require_relative '../models/address_book'
+require 'io/console'
 
 class MenuController
   attr_accessor :address_book
@@ -11,13 +12,15 @@ class MenuController
 
   def main_menu
 
+    system "clear"
     puts "Main Menu - #{@address_book.entries.count} entries"
     puts "1 - View all entries"
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
     puts "5 - View Entry Number n"
-    puts "6 - Exit"
+    puts "6 - Delete All Records"
+    puts "7 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -44,6 +47,9 @@ class MenuController
       view_entry_no
       main_menu
     when 6
+      detonate
+      main_menu
+    when 7
       puts "Good-bye!"
       exit(0)
     else
@@ -206,8 +212,6 @@ def search_entries
       end
   end
 
-
-
   def read_csv
 
     print "Enter CSV file to import: "
@@ -231,7 +235,7 @@ def search_entries
 
   def delete_entry(entry)
     @address_book.entries.delete(entry)
-    puts "#{entry.name} has been deleted"
+    puts "#{entry_name} has been deleted"
   end
 
   def edit_entry(entry)
@@ -250,5 +254,26 @@ def search_entries
     puts "Updated entry:"
     puts entry
   end
+
+  def detonate
+    system "clear"
+    puts "Enter 'YES' and press return to delete all records?"
+    ans = gets.chomp
+    if ans == "YES"
+      begin
+        count = @address_book.entries.count
+        @address_book.entries.clear
+        puts
+        puts "#{count} names detonated! - press enter to continue"
+        x = STDIN.getch
+      rescue
+        puts
+        puts "Unable to detonate your names - press enter to continue"
+        x = STDIN.getch
+      end
+    end
+
+  end
+
 
 end

@@ -71,5 +71,5 @@ attr_accessor :entries
 
   end
 
-
+  
 end
