@@ -39,6 +39,11 @@ attr_accessor :entries
 
   end
 
+  def binary_search(name)
+    return nil
+  end
+  
+
 
 
 end
