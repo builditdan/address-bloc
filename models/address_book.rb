@@ -60,29 +60,14 @@ attr_accessor :entries
     return nil
   end
 
-  # Review the difference between the binary search above with Jon, I matched to
-  # the Wiki binary iterative search example - look the same just flipped 
-  # the check around
+  def iterative_search(name)
 
-  def interative_search(name)
-
-    lower = 0
-    upper = entries.length - 1
-
-    while lower <= upper
-      mid = (lower + upper) / 2
-      mid_name = entries[mid].name
-
-      if mid_name == name
-        return entries[mid]
-      elsif mid_name < name
-        lower = mid + 1
-      else
-        upper = mid - 1
+    @entries.each do |entry|
+      if entry.name == name
+        return entry
       end
     end
-
-    return nil
+    return
 
   end
 
